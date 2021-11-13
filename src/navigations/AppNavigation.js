@@ -1,10 +1,6 @@
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createStackNavigator } from "react-navigation-stack";
-/* import React from 'react'
-import {createStackNavigator} from '@react-navigation/stack'
-import {NavigationContainer} from '@react-navigation/native'
-import {createDrawerNavigator} from '@react-navigation/drawer' */
 import HomeScreen from "../screens/Home/HomeScreen";
 import CategoriesScreen from "../screens/Categories/CategoriesScreen";
 import RecipeScreen from "../screens/Recipe/RecipeScreen";

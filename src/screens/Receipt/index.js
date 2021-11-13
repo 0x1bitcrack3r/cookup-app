@@ -13,12 +13,20 @@ import { connect } from "react-redux";
 import OrderSummary from "./OrderSummary";
 import themes from "../styles/theme.style";
 import firebase from "../../database/firebase";
+import BackButton from "../../components/BackButton/BackButton";
 
 const db = firebase.database();
 class Receipt extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Receipt",
+      headerLeft: () => (
+        <BackButton
+          onPress={() => {
+            navigation.navigate("Home");
+          }}
+        />
+      ),
     };
   };
 
@@ -47,7 +55,9 @@ class Receipt extends Component {
     return date + "-" + month + "-" + year;
   }
 
-  onPressButton() {}
+  onPressButton(navigation) {
+    navigation.navigate("Home");
+  }
 
   render() {
     const { customer, items } = this.props;
@@ -70,7 +80,10 @@ class Receipt extends Component {
     return (
       <View style={styles.container}>
         <View style={{ marginTop: 30 }}>
-          <TouchableOpacity style={styles.btn} onPress={this.onPressButton}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => this.onPressButton(this.props.navigation)}
+          >
             <Text style={styles.btnText}>Got to home</Text>
           </TouchableOpacity>
         </View>

@@ -1,11 +1,17 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, Image } from "react-native";
 import firebase from "../../database/firebase";
 
 const db = firebase.database();
 
 export default class OrderHistory extends React.Component {
-  state = { orders: [] };
+  constructor(props) {
+    super(props);
+    this.state = {
+      orders: [],
+    };
+  }
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: "Order History",
@@ -20,11 +26,11 @@ export default class OrderHistory extends React.Component {
       this.setState({ orders: data[uid] });
     });
   }
-  renderOrders = () => {
-    let orderKeys = Object.keys(this.state.orders);
+
+  renderOrders = (orderKeys) => {
     return (
       <View>
-        {orderKeys.length > 0 ? (
+        {orderKeys?.length > 0 ? (
           orderKeys.map((key) => (
             <View
               style={{
@@ -46,15 +52,26 @@ export default class OrderHistory extends React.Component {
             </View>
           ))
         ) : (
-          <Text>No todo item</Text>
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: 100,
+            }}
+          >
+            <Image
+              source={require("../../../assets/icons/noOrders.png")}
+              style={{ width: 400, height: 400 }}
+            />
+          </View>
         )}
       </View>
     );
   };
 
   render() {
-    const { navigation } = this.props;
-
-    return <ScrollView>{this.renderOrders()}</ScrollView>;
+    const { orders } = this.state;
+    let orderKeys = orders ? Object.keys(orders) : [];
+    return <ScrollView>{this.renderOrders(orderKeys)}</ScrollView>;
   }
 }
