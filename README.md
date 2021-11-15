@@ -4,7 +4,7 @@
 
 To run the app, simply run
 
-`npm install && expo start`
+`npm install && npm start`
 
 And scan the QR code in the Expo client app.
 
